@@ -17,7 +17,7 @@ p {
 
 #board {
     display: grid;
-    
+
 }
 
 .char-box {
@@ -25,9 +25,19 @@ p {
     background-color: #818384;
     font-weight: bold;
     color: black;
+    font-size: 20px;
     width: 50px;
     height: 50px;
     border-radius: 10px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+}
+
+.row {
+    margin: auto;
+    width: 290px;
+    padding: 10px;
 }
 
 /* 
