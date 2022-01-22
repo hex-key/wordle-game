@@ -1,6 +1,13 @@
 body {
         font-family: system-ui, sans-serif;
-    }
+        font-size: 14px;
+        line-height: 1.5;
+        background-color:#36393F;
+}
+
+p {
+    margin: 25px 50px;
+}
 
 img {
     max-width: 100%;
