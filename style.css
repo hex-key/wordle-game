@@ -1,6 +1,6 @@
 body {
     font-family: system-ui, sans-serif;
-    color: lightblue;
+    color: lightskyblue;
     background-color: #36393F;
 }
 
@@ -31,13 +31,13 @@ textarea {
 }
 
 #start-button {
-    background-color: lightblue;
+    background-color: lightskyblue;
     display: block;
     margin: auto;
     margin-bottom: 20px;
     width: 200px;
     height: 40px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-weight: bold;
     font-size: 20px;
     border: none;
