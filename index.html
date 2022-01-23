@@ -4,24 +4,61 @@
         <title>Wordle Game</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" type="text/css" href="./style.css" />
-        <script src="/script.js" defer></script>
+        <script src="./script.js" defer></script>
     </head>
     <body>
         <br>
-        <br>
-        <h1> wordle time WWW </h1>
-        <p style="margin-left:25%"> play game instruction </p>
+        <p> Try to guess the five-letter word within six guesses. </p>
+        <p> If a letter is gray, it's not in the word. If it's yellow, it's in the word but in a different position. If it's green, it's in the right place. </p>
+
+        <button id="start-button" onclick="startGame()"> start a game! </button>
 
         <!-- 5 by 6 square of read-only text areas (transparent/white outline) -->
-        <div class="row">
-            <div class="char-box"> U </div>
-            <div class="char-box"> R </div>
-            <div class="char-box"> M </div>
-            <div class="char-box"> O </div>
-            <div class="char-box"> M </div>
+        <div class="board">
+            <div class="row">
+                <div class="char-box"> A </div>
+                <div class="char-box"> B </div>
+                <div class="char-box"> C </div>
+                <div class="char-box"> D </div>
+                <div class="char-box"> E </div>
+            </div>
+            <div class="row">
+                <div class="char-box"> A </div>
+                <div class="char-box"> B </div>
+                <div class="char-box"> C </div>
+                <div class="char-box"> D </div>
+                <div class="char-box"> E </div>
+            </div>
+            <div class="row">
+                <div class="char-box"> A </div>
+                <div class="char-box"> B </div>
+                <div class="char-box"> C </div>
+                <div class="char-box"> D </div>
+                <div class="char-box"> E </div>
+            </div>
+            <div class="row">
+                <div class="char-box"> A </div>
+                <div class="char-box"> B </div>
+                <div class="char-box"> C </div>
+                <div class="char-box"> D </div>
+                <div class="char-box"> E </div>
+            </div>
+            <div class="row">
+                <div class="char-box"> A </div>
+                <div class="char-box"> B </div>
+                <div class="char-box"> C </div>
+                <div class="char-box"> D </div>
+                <div class="char-box"> E </div>
+            </div>
+            <div class="row">
+                <div class="char-box"> A </div>
+                <div class="char-box"> B </div>
+                <div class="char-box"> C </div>
+                <div class="char-box"> D </div>
+                <div class="char-box"> E </div>
+            </div>
         </div>
-        <!-- text box to actually enter things – enter key sends guess to dictionary and then next row of text boxes -->
-        <!-- letters and shit -->
-        
+        <!-- enter key sends guess to dictionary and then fills in a row of boxes w feedback info -->
+        <textarea id="text-box" rows="1" maxlength="5" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" autofocus></textarea>
     </body>
 </html>
