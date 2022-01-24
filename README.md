@@ -1,1 +1,0 @@
-wordle time WWWW

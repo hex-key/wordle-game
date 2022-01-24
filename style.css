@@ -1,39 +1,54 @@
 body {
-    font-family: system-ui, sans-serif;
+    font-family: verdana, sans-serif;
     color: lightskyblue;
     background-color: #36393F;
 }
 
 p {
-    margin-top: 5px;
+    margin-top: 3px;
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    font-size: 20px;
+    font-size: 16px;
 }
 
-textarea {
-    display: block;
+input {
     resize: none;
+    background-color: #72767D;
+    text-align: center;
+    overflow: hidden;
+    outline: none;
+}
+
+#answer-box {
+    display: block;
     border-radius: 5px;
     margin: auto;
     height: 35px;
     width: 270px;
     margin-top: 15px;
-    background-color: #72767D;
-    text-align: center;
     text-transform: uppercase;
     line-height: 35px;
     font-size: 20px;
     font-weight: bold;
-    overflow: hidden;
-    outline: none;
+}
+
+#seed-input {
+    display: inline-block;
+    background-color: lightskyblue;
+    width: 100px;
+    height: 40px;
+    margin-left: 50px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    line-height: 39px;
 }
 
 #start-button {
     background-color: lightskyblue;
-    display: block;
-    margin: auto;
+    display: inline-block;
     margin-bottom: 20px;
     width: 200px;
     height: 40px;
@@ -46,8 +61,27 @@ textarea {
         -12px -12px 24px #ccf8ff; */
 }
 
+#start-button:hover {
+    background-color: rgb(111, 179, 221);
+    cursor: pointer;
+}
+
+#start-button:active {
+    background-color: rgb(72, 146, 192);
+    cursor: pointer;
+}
+
+#input-row {
+    display: block;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 365px;
+}
+
 #board {
     display: grid;
+    width: 313px;
 }
 
 .char-box {
@@ -70,7 +104,7 @@ textarea {
 
 .row {
     margin: auto;
-    width: 308px;
+    width: 313px;
     padding: 2px;
 }
 

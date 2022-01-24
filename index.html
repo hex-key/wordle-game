@@ -11,55 +11,58 @@
         <br>
         <p> Try to guess the five-letter word within six guesses. </p>
         <p> If a letter is gray, it's not in the word. If it's yellow, it's in the word but in a different position. If it's green, it's in the right place. </p>
+        <p> Enter an optional seed to play the same word as a friend! </p>
+        <p style="font-size:10px"> Your clipboard contents will be overridden if you complete a game successfully so make sure you don't have anything important copied glhf </p>
 
-        <button id="start-button" onclick="startGame()"> start a game! </button>
+        <div class="flexbox" id="input-row">
+            <button id="start-button" onclick="playGame()"> start a game! </button>
+            <input id="seed-input" type="number" placeholder="seed">
+        </div>
 
-        <!-- 5 by 6 square of read-only text areas (transparent/white outline) -->
         <div class="board">
-            <div class="row">
-                <div class="char-box"> A </div>
-                <div class="char-box"> B </div>
-                <div class="char-box"> C </div>
-                <div class="char-box"> D </div>
-                <div class="char-box"> E </div>
+            <div class="row" id="row-1">
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
             </div>
-            <div class="row">
-                <div class="char-box"> A </div>
-                <div class="char-box"> B </div>
-                <div class="char-box"> C </div>
-                <div class="char-box"> D </div>
-                <div class="char-box"> E </div>
+            <div class="row" id="row-2">
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
             </div>
-            <div class="row">
-                <div class="char-box"> A </div>
-                <div class="char-box"> B </div>
-                <div class="char-box"> C </div>
-                <div class="char-box"> D </div>
-                <div class="char-box"> E </div>
+            <div class="row" id="row-3">
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
             </div>
-            <div class="row">
-                <div class="char-box"> A </div>
-                <div class="char-box"> B </div>
-                <div class="char-box"> C </div>
-                <div class="char-box"> D </div>
-                <div class="char-box"> E </div>
+            <div class="row" id="row-4">
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
             </div>
-            <div class="row">
-                <div class="char-box"> A </div>
-                <div class="char-box"> B </div>
-                <div class="char-box"> C </div>
-                <div class="char-box"> D </div>
-                <div class="char-box"> E </div>
+            <div class="row" id="row-5">
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
             </div>
-            <div class="row">
-                <div class="char-box"> A </div>
-                <div class="char-box"> B </div>
-                <div class="char-box"> C </div>
-                <div class="char-box"> D </div>
-                <div class="char-box"> E </div>
+            <div class="row" id="row-6">
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
+                <div class="char-box">  </div>
             </div>
         </div>
-        <!-- enter key sends guess to dictionary and then fills in a row of boxes w feedback info -->
-        <textarea id="text-box" rows="1" maxlength="5" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" autofocus></textarea>
+        <input id="answer-box" type="text" rows="1" maxlength="5" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" autofocus></textarea>
     </body>
 </html>
