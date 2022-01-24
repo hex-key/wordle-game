@@ -21,9 +21,9 @@ const gameWords = [
 function playGame() {
     gameInProgress = true;
     guesses = 0;
+    shareable = "";
     
     // pick an answer
-    var answer;
     var rand = Math.floor(Math.random() * gameWords.length);
     if (seed.value !== "") { 
         index = parseInt(seed.value);
@@ -31,44 +31,51 @@ function playGame() {
         index = rand;
     }
 
+    btn.style.backgroundColor = "#4892c0";
+
     answer = gameWords[index];
-    alert(answer);
 }
 
 //if enter key pressed while in text box. contains main game logic
 textBox.addEventListener("keyup", (event) => {
     if (event.keyCode === 13) {
+        console.log(answer);
         event.preventDefault();
         // if valid guess play game
-        if (gameInProgress && textBox.value.length === 5 && validWords.includes(textBox.value.lower())) {
+        if (gameInProgress && textBox.value.length === 5 && validWords.includes(textBox.value.toLowerCase())) {
             guesses++;
+            guess = textBox.value.toLowerCase();
             var feedback = check(answer, guess);
             // if game won
             if (feedback === "+++++") {
                 winSequence();
                 gameInProgress = false;
             } else {
-                feedback = check(gameWords[index], textBox.value);
                 var rowID = "row-"+guesses;
                 var currentRow = document.getElementById(rowID);
-                boxes = currentRow.getElementsByTagName("*");
+                boxes = Array.from(currentRow.getElementsByTagName("div"));
 
                 var i = 0;
-                for (box in boxes) {
+                for (box of boxes) {
                     box.innerHTML = guess.charAt(i).toUpperCase();
                     switch (feedback.charAt(i)) {
                         case "+":
-                            box.style.backgroundColor = "green";
+                            box.style.backgroundColor = "#5A8C4D";
+                            break;
                         case "#":
-                            box.style.backgroundColor = "yellow";
+                            box.style.backgroundColor = "#B49E34";
+                            break;
                         default:
-                            box.style.backgroundColor = box.style.backgroundColor;
+                            break;
                     }
+                    i++;
                 }
+
+                shareable += (convertToSquares(feedback));
+
                 // end the game if that was the last guess and they didn't win
-                if (guesses === 6 && gameInProgress) {
-                    gameInProgress = false;
-                    alert("That's all your guesses! The seed was "+index+" if you'd like to play again or challenge a friend.");
+                if (guesses === 6) {
+                    loseSequence();
                 }
             }
         } //: if valid guess play game
@@ -82,19 +89,19 @@ textBox.addEventListener("keyup", (event) => {
 });
 
 function check (ans, str) { // returns string consisting of + # _ for parsing 
-    var answer = ans.split("");
-    var guess = str.split("");
-
-    var feedback = "";
-
-    if (answer === guess) {
+    if (ans === str) {
         return "+++++";
     }
 
+    ans = ans.split("");
+    str = str.split("");
+
+    var feedback = "";
+
     for (var i = 0; i < 5; i++) {
-        if (answer[i] === guess[i]) {
+        if (ans[i] === str[i]) {
             feedback += "+";
-        } else if (answer.includes(guess[i])) {
+        } else if (ans.includes(str[i])) {
             feedback += "#";
         } else {
             feedback += "_";
@@ -105,11 +112,22 @@ function check (ans, str) { // returns string consisting of + # _ for parsing
 }
 
 function winSequence() {
+    gameInProgress = false;
+    alert("Congratulations! A shareable summary of the game has been copied to your clipboard.");
     navigator.permissions.query({name: "clipboard-write"}).then(result => {
         if (result.state == "granted" || result.state == "prompt") {
-            navigator.clipboard.writeText("Wordle Seed: " + index + "," + guesses + "/6\n" + shareable);
+            navigator.clipboard.writeText("Wordle Seed: " + index + ", " + guesses + "/6\n" + shareable);
         }
     });
+    clearBoard();
+    btn.style.backgroundColor = "#6fb3dd";
+}
+
+function loseSequence() {
+    gameInProgress = false;
+    alert("That's all your guesses! The seed was "+index+" if you'd like to play again or challenge a friend.");
+    clearBoard();
+    btn.style.backgroundColor = "lightskyblue";
 }
 
 function convertToSquares(feedback) {
@@ -127,4 +145,20 @@ function convertToSquares(feedback) {
                 break;
         }
     }
+}
+
+function clearBoard() {
+    for (var i = 1; i <= 6; i++) {
+        var rowID = "row-"+i;
+        var currentRow = document.getElementById(rowID);
+        boxes = Array.from(currentRow.getElementsByTagName("div"));
+        for (box of boxes) {
+            box.innerHTML = "  ";
+            box.style.backgroundColor = "#72767D";
+        }
+    }
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
