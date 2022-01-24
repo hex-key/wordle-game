@@ -69,8 +69,7 @@ textBox.addEventListener("keyup", (event) => {
                     }
                     i++;
                 }
-                console.log(feedback);
-                console.log(convertToSquares(feedback));
+                
                 shareable += (convertToSquares(feedback));
 
                 // end the game if that was the last guess and they didn't win
