@@ -24,9 +24,10 @@ function playGame() {
     guesses = 0;
     shareable = "";
     clearBoard();
-    document.getElementById("congrats-text").hidden = true;
     document.getElementById("share-box").innerHTML = "";
+    document.getElementById("congrats-text").hidden = true;
     document.getElementById("share-box").hidden = true;
+    document.getElementById("share-box").style.backgroundColor = "#36393F";
     
     // pick an answer
     var rand = Math.floor(Math.random() * gameWords.length);
@@ -54,30 +55,32 @@ textBox.addEventListener("keyup", (event) => {
             guesses++;
             guess = textBox.value.toLowerCase();
             var feedback = check(answer, guess);
+            var rowID = "row-"+guesses;
+            var currentRow = document.getElementById(rowID);
+            boxes = Array.from(currentRow.getElementsByTagName("div"));
+
+            var i = 0;
+            for (box of boxes) {
+                box.innerHTML = guess.charAt(i).toUpperCase();
+                switch (feedback.charAt(i)) {
+                    case "+":
+                        box.style.backgroundColor = "#5A8C4D";
+                        break;
+                    case "#":
+                        box.style.backgroundColor = "#B49E34";
+                        break;
+                    default:
+                        break;
+                }
+                i++;
+            }            
+            
             // if game won
             if (feedback === "+++++") {
                 winSequence();
                 gameInProgress = false;
             } else {
-                var rowID = "row-"+guesses;
-                var currentRow = document.getElementById(rowID);
-                boxes = Array.from(currentRow.getElementsByTagName("div"));
 
-                var i = 0;
-                for (box of boxes) {
-                    box.innerHTML = guess.charAt(i).toUpperCase();
-                    switch (feedback.charAt(i)) {
-                        case "+":
-                            box.style.backgroundColor = "#5A8C4D";
-                            break;
-                        case "#":
-                            box.style.backgroundColor = "#B49E34";
-                            break;
-                        default:
-                            break;
-                    }
-                    i++;
-                }
 
                 shareable += (convertToSquares(feedback));
                 console.log(convertToSquares(feedback));
@@ -124,6 +127,7 @@ function check (ans, str) { // returns string consisting of + # _ for parsing
 function winSequence() {
     gameInProgress = false;
     var box = document.getElementById("share-box");
+    box.style.backgroundColor = "#72767D";
     var square = String.fromCodePoint(0x1F7E9);
     box.innerHTML = ("Wordle Seed #" + index + ", " + guesses + "/6\n" + shareable + "\n" + square + square + square + square + square);
     document.getElementById("congrats-text").innerHTML = "Congrats! Copy and paste from this box to share with friends!";
