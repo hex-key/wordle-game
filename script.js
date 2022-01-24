@@ -20,30 +20,34 @@ const gameWords = [
 
 // resets word/guesses/tiles
 function playGame() {
-    gameInProgress = true;
-    guesses = 0;
-    shareable = "";
-    clearBoard();
-    document.getElementById("share-box").innerHTML = "";
-    document.getElementById("congrats-text").hidden = true;
-    document.getElementById("share-box").hidden = true;
-    document.getElementById("share-box").style.backgroundColor = "#36393F";
-    
-    // pick an answer
-    var rand = Math.floor(Math.random() * gameWords.length);
-    if (seed.value !== "") { 
-        if (seed.value >= 0 && seed.value < gameWords.length) {
-            index = parseInt(seed.value);
-        } else {
-            alert("Invalid seed! Must be between 0 and " + (gameWords.length - 1));
+    if (!gameInProgress) {
+        gameInProgress = true;
+        guesses = 0;
+        shareable = "";
+        clearBoard();
+        document.getElementById("share-box").innerHTML = "";
+        document.getElementById("congrats-text").hidden = true;
+        document.getElementById("share-box").hidden = true;
+        document.getElementById("share-box").style.backgroundColor = "#36393F";
+        
+        // pick an answer
+        var rand = Math.floor(Math.random() * gameWords.length);
+        if (seed.value !== "") { 
+            if (seed.value >= 0 && seed.value < gameWords.length) {
+                index = parseInt(seed.value);
+            } else {
+                alert("Invalid seed! Must be between 0 and " + (gameWords.length - 1));
+            }
+        } else { 
+            index = rand;
         }
-    } else { 
-        index = rand;
+
+        btn.style.backgroundColor = "#529dcc";
+
+        answer = gameWords[index];
+    } else {
+        alert("Game already in progress - finish it or reload the page to start a new one!")
     }
-
-    btn.style.backgroundColor = "#529dcc";
-
-    answer = gameWords[index];
 }
 
 //if enter key pressed while in text box. contains main game logic
