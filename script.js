@@ -126,6 +126,7 @@ function winSequence() {
     var box = document.getElementById("share-box");
     var square = String.fromCodePoint(0x1F7E9);
     box.innerHTML = ("Wordle Seed #" + index + ", " + guesses + "/6\n" + shareable + "\n" + square + square + square + square + square);
+    document.getElementById("congrats-text").innerHTML = "Congrats! Copy and paste from this box to share with friends!";
     document.getElementById("congrats-text").hidden = false;
     box.hidden = false;
     box.style.display = "block";
@@ -134,7 +135,8 @@ function winSequence() {
 
 function loseSequence() {
     gameInProgress = false;
-    alert("That's all your guesses! The seed was "+index+" if you'd like to play again or challenge a friend.");
+    document.getElementById("congrats-text").innerHTML = "That's all your guesses! The seed was "+index+" if you'd like to play again or challenge a friend.";
+    document.getElementById("congrats-text").hidden = false;
     btn.style.backgroundColor = "lightskyblue";
 }
 
