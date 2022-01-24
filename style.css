@@ -107,3 +107,16 @@ input {
     width: 313px;
     padding: 2px;
 }
+
+#share-box {
+    margin-top: 20px;
+    margin: auto;
+    width: 200px;
+    height: 250px;
+    resize: none;
+    background-color: #72767D;
+    border-radius: 10px;
+    overflow: hidden;
+    outline: none;
+    padding: 10px;
+}

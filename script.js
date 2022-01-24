@@ -2,6 +2,7 @@ const btn = document.querySelector('#start-button');
 const textBox = document.querySelector('#answer-box');
 const seed = document.querySelector('#seed-input');
 const board = document.querySelector('#board');
+const share = document.querySelector('#share-box');
 
 var gameInProgress = false;
 var guesses = 0;
@@ -22,16 +23,24 @@ function playGame() {
     gameInProgress = true;
     guesses = 0;
     shareable = "";
+    clearBoard();
+    document.getElementById("congrats-text").hidden = true;
+    document.getElementById("share-box").innerHTML = "";
+    document.getElementById("share-box").hidden = true;
     
     // pick an answer
     var rand = Math.floor(Math.random() * gameWords.length);
     if (seed.value !== "") { 
-        index = parseInt(seed.value);
+        if (seed.value >= 0 && seed.value < gameWords.length) {
+            index = parseInt(seed.value);
+        } else {
+            alert("Invalid seed! Must be between 0 and " + (gameWords.length - 1));
+        }
     } else { 
         index = rand;
     }
 
-    btn.style.backgroundColor = "#4892c0";
+    btn.style.backgroundColor = "#529dcc";
 
     answer = gameWords[index];
 }
@@ -69,8 +78,9 @@ textBox.addEventListener("keyup", (event) => {
                     }
                     i++;
                 }
-                
+
                 shareable += (convertToSquares(feedback));
+                console.log(convertToSquares(feedback));
 
                 // end the game if that was the last guess and they didn't win
                 if (guesses === 6) {
@@ -80,6 +90,7 @@ textBox.addEventListener("keyup", (event) => {
         } //: if valid guess play game
         else if (gameInProgress) {
             alert("Please enter a valid 5-letter english word.");
+            textBox.focus();
         } else {
             alert("Start a game first!");
         }
@@ -112,20 +123,18 @@ function check (ans, str) { // returns string consisting of + # _ for parsing
 
 function winSequence() {
     gameInProgress = false;
-    alert("Congratulations! A shareable summary of the game has been copied to your clipboard.");
-    navigator.permissions.query({name: "clipboard-write"}).then(result => {
-        if (result.state == "granted" || result.state == "prompt") {
-            navigator.clipboard.writeText("Wordle Seed #" + index + ", " + guesses + "/6\n" + shareable);
-        }
-    });
-    clearBoard();
-    btn.style.backgroundColor = "#6fb3dd";
+    var box = document.getElementById("share-box");
+    var square = String.fromCodePoint(0x1F7E9);
+    box.innerHTML = ("Wordle Seed #" + index + ", " + guesses + "/6\n" + shareable + "\n" + square + square + square + square + square);
+    document.getElementById("congrats-text").hidden = false;
+    box.hidden = false;
+    box.style.display = "block";
+    btn.style.backgroundColor = "lightskyblue";
 }
 
 function loseSequence() {
     gameInProgress = false;
     alert("That's all your guesses! The seed was "+index+" if you'd like to play again or challenge a friend.");
-    clearBoard();
     btn.style.backgroundColor = "lightskyblue";
 }
 
@@ -135,11 +144,14 @@ function convertToSquares(feedback) {
     for (var i = 0; i < squares.length; i++) {
         switch (squares[i]) {
             case "+":
-                line += "🟩";
+                line += String.fromCodePoint(0x1F7E9);
+                break;
             case "#":
-                line += "🟨";
+                line += String.fromCodePoint(0x1F7E8);
+                break;
             case "_":
-                line += "⬛";
+                line += String.fromCodePoint(0x2B1B);
+                break;
             default:
                 break;
         }

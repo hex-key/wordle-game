@@ -12,7 +12,6 @@
         <p> Try to guess the five-letter word within six guesses. </p>
         <p> If a letter is gray, it's not in the word. If it's yellow, it's in the word but in a different position. If it's green, it's in the right place. </p>
         <p> Enter an optional seed to play the same word as a friend! </p>
-        <p style="font-size:10px"> Your clipboard contents will be overridden if you complete a game successfully so make sure you don't have anything important copied glhf </p>
 
         <div class="flexbox" id="input-row">
             <button id="start-button" onclick="playGame()"> start a game! </button>
@@ -64,5 +63,7 @@
             </div>
         </div>
         <input id="answer-box" type="text" rows="1" maxlength="5" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" autofocus></textarea>
+        <center><p hidden="true" id="congrats-text" style="margin-top:10px"> Congrats! Copy and paste from this box to share with friends! </p></center>
+        <textarea hidden="true" id="share-box" readonly="true" style="margin-bottom:50px"></textarea>
     </body>
 </html>
