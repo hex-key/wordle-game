@@ -39,7 +39,6 @@ function playGame() {
 //if enter key pressed while in text box. contains main game logic
 textBox.addEventListener("keyup", (event) => {
     if (event.keyCode === 13) {
-        console.log(answer);
         event.preventDefault();
         // if valid guess play game
         if (gameInProgress && textBox.value.length === 5 && validWords.includes(textBox.value.toLowerCase())) {
@@ -70,7 +69,8 @@ textBox.addEventListener("keyup", (event) => {
                     }
                     i++;
                 }
-
+                console.log(feedback);
+                console.log(convertToSquares(feedback));
                 shareable += (convertToSquares(feedback));
 
                 // end the game if that was the last guess and they didn't win
@@ -116,7 +116,7 @@ function winSequence() {
     alert("Congratulations! A shareable summary of the game has been copied to your clipboard.");
     navigator.permissions.query({name: "clipboard-write"}).then(result => {
         if (result.state == "granted" || result.state == "prompt") {
-            navigator.clipboard.writeText("Wordle Seed: " + index + ", " + guesses + "/6\n" + shareable);
+            navigator.clipboard.writeText("Wordle Seed #" + index + ", " + guesses + "/6\n" + shareable);
         }
     });
     clearBoard();
@@ -145,6 +145,7 @@ function convertToSquares(feedback) {
                 break;
         }
     }
+    return line;
 }
 
 function clearBoard() {
